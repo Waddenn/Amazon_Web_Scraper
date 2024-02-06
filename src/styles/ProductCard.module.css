@@ -1,0 +1,33 @@
+/* styles/ProductCard.module.css */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    height: auto;
+  }
+  
+  .title {
+    font-size: 1rem;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e44d26;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+  }

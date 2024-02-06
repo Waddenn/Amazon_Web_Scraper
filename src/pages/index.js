@@ -21,12 +21,12 @@ export default function Home() {
     "Epicerie", //grocery
     "DVD et Blu-ray", //dvd
     "Cuisine et Maison", //kitchen
-    "commerce, Industrie et Science", //industrial
+    "Commerce, Industrie et Science", //industrial
     "Engagement en faveur du climat", //climate-pledge
     "CD et Vinyles", //music
     "Bricolage", //hi
     "Kindle", //digital-text
-    "cartes cadeaux", //gift-cards
+    "Cartes cadeaux", //gift-cards
     "Beauté et Parfum", //beauty
     "Auto et Moto", //automotive
     "Applis et Jeux", //mobile-apps
@@ -40,7 +40,6 @@ export default function Home() {
 
   return (
     <div className={styles.categoriesContainer}>
-      {/* <h1 style={{ width: '100%', textAlign: 'center' }}>Amazon Categories</h1> */}
       {categories.map((category) => (
         <CategoryButton
           key={category}
