@@ -1,15 +1,15 @@
 .categoryButton {
     margin: 5px;
     padding: 20px;
-    font-size: 20px;
+    font-size: 2.5vh;
     cursor: pointer;
     border: 1px solid #ddd;
     border-radius: 5px;
     background: #f7f7f7;
     transition: all 0.3s ease;
     text-align: center;
-    height: 100px; /* Définissez la hauteur fixe que vous souhaitez pour les boutons */
-    overflow: hidden; /* Cela va cacher tout contenu qui déborde de la hauteur fixe */
+    height: 100px; 
+    overflow: hidden; 
 }
 
 .categoryButton:hover {
