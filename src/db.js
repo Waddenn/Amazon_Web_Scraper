@@ -4,7 +4,6 @@ import { setTimeout } from "timers/promises";
 
 const categories = [
   "sports",
-  "handmade",
   "fashion",
   "lighting",
   "software",
