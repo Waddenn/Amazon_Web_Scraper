@@ -1,7 +1,6 @@
 import { MongoClient } from 'mongodb';
 import puppeteer from "puppeteer";
 import { setTimeout } from "timers/promises";
-
 import dotenv from 'dotenv';
    dotenv.config();
 
@@ -37,7 +36,7 @@ const categories = [
 ];
 
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.COSMOSDB_CONNECTION_STRING;
 const client = new MongoClient(uri);
 
 let allCategoriesProducts = {};
