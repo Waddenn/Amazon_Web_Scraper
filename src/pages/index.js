@@ -1,6 +1,6 @@
-import { pageExtensions } from "../../next.config";
 import CategoryButton from "../components/CategoryButton";
 import styles from "../styles/Home.module.css";
+import Layout from '../components/Layout';
 
 export default function Home() {
   const categoryPaths = {
@@ -35,17 +35,19 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.categoriesContainer}>
-      <div className={styles.productGrid1}>
-        {Object.entries(categoryPaths).map(([category, path]) => (
-          <CategoryButton
-            key={category}
-            categoryName={category}
-            path={path}
-            className={styles.categoryButton}
-          />
-        ))}
+    <Layout>
+      <div className={styles.categoriesContainer}>
+        <div className={styles.productGrid1}>
+          {Object.entries(categoryPaths).map(([category, path]) => (
+            <CategoryButton
+              key={category}
+              categoryName={category}
+              path={path}
+              className={styles.categoryButton}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
