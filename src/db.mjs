@@ -62,12 +62,24 @@ let allCategoriesProducts = {};
           .querySelector(".a-link-normal > div > span > span")
           ?.textContent.trim();
 
+        // Récupération du nombre d'étoiles et du nombre de votes
+        const ratingText = element
+          .querySelector(".a-icon-row .a-link-normal")
+          ?.getAttribute("title"); // Par exemple, "4,3 sur 5 étoiles"
+        const rating = ratingText ? ratingText.split(" ")[0] : null; // Prend le premier élément du texte divisé, soit "4,3"
+        const votesText = element.querySelector(
+          ".a-icon-row .a-size-small"
+        )?.textContent; // Par exemple, "5 196"
+        const votes = votesText ? votesText.replace(/[^\d]/g, "") : null; // Supprime tous les caractères non numériques, soit "5196"
+
         items.push({
           rank,
           title,
           imageUrl,
           url,
           price,
+          rating, // Ajout du nombre d'étoiles
+          votes, // Ajout du nombre de votes
         });
       }
 
@@ -85,3 +97,4 @@ let allCategoriesProducts = {};
   await browser.close();
   console.log("Successfully updated JSON file in real-time");
 })();
+
