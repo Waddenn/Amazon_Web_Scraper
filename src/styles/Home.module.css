@@ -1,15 +1,16 @@
 .categoryButton {
-    margin: 5px;
-    padding: 20px;
+    padding-left: 2vw;
+    padding-right: 2vw;
     font-size: 2.5vh;
     cursor: pointer;
-    border: 1px solid #ddd;
+    border: solid #dbdbdb 2px;
     border-radius: 5px;
-    background: #f7f7f7;
+    background-color: white;
     transition: all 0.3s ease;
     text-align: center;
-    height: 100px; 
+    height: 13vh; 
     overflow: hidden; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .categoryButton:hover {
@@ -19,26 +20,12 @@
 .categoriesContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px; 
-    padding: 10px;
-}
+    gap: 1vh; 
+    padding: 3vw;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #f1f1f1;
+    min-height: 100vh;
+  }
 
 
 
-/* styles/Home.module.css */
-.container {
-    padding: 50px;
-    max-width: 1200px;
-    margin: auto;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .productGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
