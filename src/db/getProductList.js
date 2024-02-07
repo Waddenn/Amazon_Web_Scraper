@@ -1,11 +1,16 @@
-import { readFile } from "node:fs/promises";
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+dotenv.config();
 const getProductList = async (category) => {
-  const json = JSON.parse(
-    await readFile("./top_products_by_category.json", {
-      encoding: "utf-8",
-    })
-  );
-  const list = json[category];
+  const uri = process.env.COSMOSDB_CONNECTION_STRING;
+  const client = new MongoClient(uri);
+  await client.connect();
+  const database = client.db("amazon-scrapper");
+  const collection = database.collection("produits");
+  const list = await collection
+    .find({ category: category })
+    .project({ _id: 0 })
+    .toArray();
   return list;
 };
 export default getProductList;
