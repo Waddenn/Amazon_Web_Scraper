@@ -1,5 +1,5 @@
+import { MongoClient } from 'mongodb';
 import puppeteer from "puppeteer";
-import fs from "fs";
 import { setTimeout } from "timers/promises";
 
 const categories = [
@@ -33,10 +33,19 @@ const categories = [
   "pet-supplies",
 ];
 
-const jsonFilePath = "top_products_by_category.json";
+
+const uri = "mongodb+srv://Lucas:Azertyuiop!@amazonscrapper-database.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000";
+const client = new MongoClient(uri);
+
 let allCategoriesProducts = {};
 
 (async () => {
+  await client.connect();
+  const database = client.db("amazon-scrapper");
+  const collection = database.collection("produits");
+
+  await collection.deleteMany({});
+
   const browser = await puppeteer.launch();
 
   for (const category of categories) {
@@ -86,14 +95,14 @@ let allCategoriesProducts = {};
     });
 
     allCategoriesProducts[category] = products;
-    fs.writeFileSync(
-      jsonFilePath,
-      JSON.stringify(allCategoriesProducts, null, 2)
-    );
+
+    await collection.insertMany(products.map(product => ({ ...product, category })));
+
     await page.close();
   }
 
   await browser.close();
-  console.log("Successfully updated JSON file in real-time");
+  await client.close(); 
+  console.log("Successfully updated the database with the products");
 })();
 
