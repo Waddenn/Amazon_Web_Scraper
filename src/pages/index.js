@@ -36,16 +36,15 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.categoriesContainer}>
-      {Object.entries(categoryPaths).map(([category, path]) => (
-        <CategoryButton
-          key={category}
-          categoryName={category}
-          path={path}
-          className={styles.categoryButton}
-        />
-      ))}
-    </div>
+      <div className={styles.categoriesContainer}>
+        {Object.entries(categoryPaths).map(([category, path]) => (
+          <CategoryButton
+            key={category}
+            categoryName={category}
+            path={path}
+            className={styles.categoryButton}
+          />
+        ))}
+      </div>
   );
 }
-
