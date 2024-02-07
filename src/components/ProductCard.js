@@ -6,6 +6,7 @@ import styles from '../styles/ProductCard.module.css';
 const ProductCard = ({ product }) => {
   return (
     <div className={styles.card}>
+      <div className={styles.rank}>{product.rank}</div>
       <Link href={product.url} passHref>
         <div className={styles.imageWrapper}>
           <Image

@@ -3,9 +3,12 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    margin: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
+    padding: 2vh;
+    width: 20vw;
+    align-self: stretch; 
+    position: relative; 
   }
   
   .card:hover {
@@ -22,6 +25,12 @@
     padding: 8px 12px;
     color: #333;
     text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.8rem;
   }
   
   .price {
@@ -30,4 +39,15 @@
     color: #e44d26;
     padding: 4px 12px;
     margin-bottom: 12px;
+  }
+
+  .rank {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    padding: 5px; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: #fff; 
+    font-size: 1rem;
+    z-index: 10;
   }

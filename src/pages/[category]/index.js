@@ -3,7 +3,6 @@ import React from "react";
 import ProductCard from "../../components/ProductCard";
 import styles from "../../styles/Home.module.css";
 import getProductList from "@/db/getProductList";
-import { useRouter } from "next/router";
 
 export const getServerSideProps = async (context) => {
   const { category } = context.query;
