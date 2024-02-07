@@ -49,7 +49,7 @@ let allCategoriesProducts = {};
       const productElements = document.querySelectorAll("[data-asin]");
 
       for (let element of productElements) {
-        if (items.length >= 10) {
+        if (items.length >= 30) {
           break;
         }
         const rank = element.querySelector(".zg-bdg-text")?.textContent;
