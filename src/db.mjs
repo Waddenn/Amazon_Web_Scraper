@@ -2,6 +2,9 @@ import { MongoClient } from 'mongodb';
 import puppeteer from "puppeteer";
 import { setTimeout } from "timers/promises";
 
+import dotenv from 'dotenv';
+   dotenv.config();
+
 const categories = [
   "sports",
   "fashion",
@@ -34,7 +37,7 @@ const categories = [
 ];
 
 
-const uri = "mongodb+srv://Lucas:Azertyuiop!@amazonscrapper-database.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000";
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 let allCategoriesProducts = {};
