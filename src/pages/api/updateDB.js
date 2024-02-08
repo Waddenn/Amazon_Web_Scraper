@@ -111,6 +111,6 @@ const handler = async (req, res) => {
 
   await browser.close();
   await client.close();
-  console.log("Successfully updated the database with the products");
+  res.send("Successfully updated the database with the products");
 };
-export default handler
+export default handler;

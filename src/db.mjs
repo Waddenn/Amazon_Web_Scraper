@@ -44,7 +44,7 @@ const client = new MongoClient(uri);
 
 let allCategoriesProducts = {};
 
-(async () => {
+const main = async () => {
   await client.connect();
   const database = client.db("amazon-scrapper");
   const collection = database.collection("produits");
@@ -110,5 +110,7 @@ let allCategoriesProducts = {};
   await client.close(); 
   console.log("Successfully updated the database with the products");
   await getProductList_json();
-})();
+}
+main();
 
+export default main
