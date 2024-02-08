@@ -22,6 +22,12 @@ const getProductList = async (category, minPrice, maxPrice) => {
     );
   }
 
+  list.sort((a, b) => {
+    const rankA = parseInt(a.rank.replace('#', ''), 10);
+    const rankB = parseInt(b.rank.replace('#', ''), 10);
+    return rankA - rankB;
+  });
+
   return list;
 };
 
