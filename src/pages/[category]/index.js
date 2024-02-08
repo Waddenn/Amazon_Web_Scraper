@@ -4,7 +4,6 @@ import ProductCard from "../../components/ProductCard";
 import styles from "../../styles/Home.module.css";
 import getProductList from "@/db/getProductList";
 import Layout from "../../components/Layout";
-import Navbar from "@/components/Navbar";
 
 const categoryNames = {
   'sports': "Sports et Loisirs",
