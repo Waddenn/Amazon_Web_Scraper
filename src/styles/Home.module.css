@@ -23,6 +23,7 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #e3e6e6;
+    padding-top: 10vh;
   }
 
 .productGrid1 {
@@ -43,6 +44,7 @@
     margin: auto;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #e3e6e6;
+    padding-top: 15vh;
   }
   
   .title {
@@ -58,5 +60,3 @@
     grid-auto-rows: 1fr;
   }
 
-
-  

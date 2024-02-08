@@ -1,12 +1,18 @@
+/* styles/Navbar.module.css */
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #232f3e;
   color: white;
-  padding-left: 3vw;
-  padding-right: 3vw;
+  padding: 0 3vw;
   height: 10vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo a {
@@ -24,4 +30,31 @@
 
 .links a:hover {
   text-decoration: underline;
+}
+
+.filterForm {
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.filterForm input {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  max-width: 100px;
+}
+
+.filterForm button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #ff9900;
+  color: white;
+  cursor: pointer;
+}
+
+.filterForm button:hover {
+  background-color: #e68a00;
 }
