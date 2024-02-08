@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.logo}>
         <Link href="/">
-          Amazon Web Scrapper
+          Amazon Web Scraper
         </Link>
       </div>
       {isCategoryPage && (
