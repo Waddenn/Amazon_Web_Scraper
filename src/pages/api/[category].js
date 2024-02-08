@@ -3,7 +3,7 @@ const handler = async (req, res) => {
   if (req.method === "GET") {
     const category = req.query.category;
     const json = JSON.parse(
-      await readFile("./top_products_by_category.json", {
+      await readFile("/tmp/top_products_by_category.json", {
         encoding: "utf-8",
       })
     );

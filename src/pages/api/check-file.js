@@ -4,7 +4,7 @@ import path from 'path';
 import main from '@/db.mjs';
 
 export default async function handler(req, res) {
-  const filePath = path.join(process.cwd(), './top_products_by_category.json');
+  const filePath = path.join(process.cwd(), '/tmp/top_products_by_category.json');
 
   try {
     if (!existsSync(filePath)) {

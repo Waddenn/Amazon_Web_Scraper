@@ -9,33 +9,6 @@ import dotenv from 'dotenv';
 
 const categories = [
   "sports",
-  "fashion",
-  "lighting",
-  "software",
-  "books",
-  "videogames",
-  "toys",
-  "lawn-garden",
-  "musical-instruments",
-  "computers",
-  "hpc",
-  "electronics",
-  "appliances",
-  "officeproduct",
-  "grocery",
-  "dvd",
-  "kitchen",
-  "industrial",
-  "climate-pledge",
-  "music",
-  "hi",
-  "digital-text",
-  "gift-cards",
-  "beauty",
-  "automotive",
-  "mobile-apps",
-  "amazon-devices",
-  "pet-supplies",
 ];
 
 

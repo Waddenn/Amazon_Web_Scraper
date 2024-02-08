@@ -12,7 +12,7 @@ export const getProductList_json = async () => {
     const collection = database.collection("produits");
     const list = await collection.find().toArray();
     await writeFile(
-      "./top_products_by_category.json",
+      "/tmp/top_products_by_category.json",
       JSON.stringify(list, null, 2)
     );
     console.log(
