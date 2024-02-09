@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/ProductCard.module.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 const ProductCard = ({ product }) => {
+  const [isWishlist, setIsWhishlist] = useState(false);
   const handleWhislist = async () => {
-    const loginCookie = Cookies.get("login");
-    const user = loginCookie ? loginCookie.user : null;
+    const user = Cookies.get("username");
     if (user) {
-      await axios.post("/api/addWhishlist", {
-        user: user,
-        product: product.title,
-      });
+      if (!isWishlist) {
+        await axios.post("/api/whishlist", {
+          user: user,
+          product: product.title,
+        });
+      } else {
+        await axios.delete("/api/whishlist");
+      }
+      setIsWhishlist(isWishlist ? false : true);
     }
   };
   return (
@@ -34,7 +39,9 @@ const ProductCard = ({ product }) => {
         <h3 className={styles.title}>{product.title}</h3>
         <p className={styles.price}>{product.price}</p>
       </Link>
-      <button onClick={handleWhislist}>Add to whishlist</button>
+      <button onClick={handleWhislist}>
+        {isWishlist ? "Remove from whishlist" : "Add to whishlist"}
+      </button>
     </div>
   );
 };
