@@ -2,14 +2,28 @@
 import Link from 'next/link';
 import styles from '../styles/Navbar.module.css';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie'; 
 
 const Navbar = () => {
   const router = useRouter();
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [username, setUsername] = useState('');
 
   const isCategoryPage = router.pathname.includes('/[category]');
+
+  useEffect(() => {
+    const usernameFromCookie = Cookies.get('username');
+    if (usernameFromCookie) {
+      setUsername(usernameFromCookie);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    Cookies.remove('username');
+    router.push('/login');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,6 +58,12 @@ const Navbar = () => {
           />
           <button className={styles.filterButton} type="submit">Filtrer</button>
         </form>
+      )}
+      {username && (
+        <div className={styles.userSection}>
+          <span className={styles.username}>{username}</span>
+          <button onClick={handleLogout} className={styles.logoutButton}>Déconnexion</button>
+        </div>
       )}
     </nav>
   );
