@@ -32,3 +32,4 @@ const getProductList = async (category, minPrice, maxPrice) => {
 };
 
 export default getProductList;
+

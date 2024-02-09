@@ -1,23 +1,43 @@
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/ProductCard.module.css";
-import axios from "axios";
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
+import styles from '../styles/ProductCard.module.css';
+import React, { useState } from 'react';
+
 const ProductCard = ({ product }) => {
-  const [isWishlist, setIsWhishlist] = useState(false);
-  const handleWhislist = async () => {
-    const user = Cookies.get("username");
-    if (user) {
-      if (!isWishlist) {
-        await axios.post("/api/whishlist", {
-          user: user,
-          product: product.title,
-        });
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const addToWishlist = async () => {
+    const username = Cookies.get('username');
+    if (!username) {
+      alert('Vous devez être connecté pour ajouter des articles à la wishlist.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/addToWishlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product,
+          username,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setIsInWishlist(true); 
+        alert('Produit ajouté à la wishlist');
+      } else if (response.status === 409) {
+        setIsInWishlist(true); 
+        alert('Produit déjà dans la wishlist');
       } else {
-        await axios.delete("/api/whishlist");
+        alert(data.message || 'Une erreur est survenue');
       }
-      setIsWhishlist(isWishlist ? false : true);
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout du produit à la wishlist:', error);
+      alert('Une erreur est survenue lors de l\'ajout du produit à la wishlist.');
     }
   };
   return (
@@ -39,8 +59,8 @@ const ProductCard = ({ product }) => {
         <h3 className={styles.title}>{product.title}</h3>
         <p className={styles.price}>{product.price}</p>
       </Link>
-      <button onClick={handleWhislist}>
-        {isWishlist ? "Remove from whishlist" : "Add to whishlist"}
+      <button onClick={addToWishlist} className={styles.wishlistButton} disabled={isInWishlist}>
+        {isInWishlist ? 'Dans la Wishlist' : 'Ajouter à la Wishlist'}
       </button>
     </div>
   );

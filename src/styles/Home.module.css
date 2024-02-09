@@ -46,6 +46,15 @@
     background-color: #e3e6e6;
     padding-top: 15vh;
   }
+  .container1 {
+    padding: 3vw;
+    max-width: 100%;
+    margin: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #e3e6e6;
+    padding-top: 15vh;
+    height: 100vh;
+  }
   
   .title {
     text-align: center;
