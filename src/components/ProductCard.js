@@ -28,7 +28,6 @@ const ProductCard = ({ product }) => {
       const data = await response.json();
       if (response.ok) {
         setIsInWishlist(true); 
-        alert('Produit ajouté à la wishlist');
       } else if (response.status === 409) {
         setIsInWishlist(true); 
         alert('Produit déjà dans la wishlist');
