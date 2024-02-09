@@ -35,7 +35,7 @@
 .filterForm {
   display: flex;
   color: black;
-  margin-left: 30vw;
+  margin-left: 25vw;
 }
 
 
@@ -147,3 +147,22 @@
 
 }
 
+.wishlistLink {
+  transition: background-color 0.3s; 
+  margin-left: 1rem; 
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #232f3e;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  outline: none; 
+  transition: background-color 0.3s; 
+  font-weight: bold;
+  border: 1px solid transparent;
+}
+
+.wishlistLink:hover {
+  border-color: white;
+}

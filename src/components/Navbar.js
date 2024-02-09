@@ -64,6 +64,9 @@ const Navbar = () => {
       {username ? (
         <div className={styles.userSection}>
           <span className={styles.username}>{username}</span>
+          <Link href="/wishlist" className={styles.wishlistLink}>
+            Wishlist
+          </Link>
           <button onClick={handleLogout} className={styles.logoutButton}>
             Déconnexion
           </button>
@@ -80,3 +83,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
