@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const handler = async (req, res) => {
-  if (req.method === "GET") {
+  if (req.method === "POST") {
     const uri = process.env.COSMOSDB_CONNECTION_STRING;
     const client = new MongoClient(uri);
     try {
