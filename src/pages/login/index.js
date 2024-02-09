@@ -29,6 +29,7 @@ export default function Login() {
   };
   return (
     <Layout>
+    <div className={styles.pageBackground}>
       <div className={styles.loginContainer}>
         <form onSubmit={handleLogin}>
           <div className={styles.formGroup}>
@@ -63,6 +64,9 @@ export default function Login() {
           </div>
         </form>
       </div>
+      </div>
     </Layout>
   );
 }
+
+

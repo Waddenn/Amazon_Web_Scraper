@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from '../styles/Navbar.module.css';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const router = useRouter();
@@ -59,10 +59,16 @@ const Navbar = () => {
           <button className={styles.filterButton} type="submit">Filtrer</button>
         </form>
       )}
-      {username && (
+      {username ? (
         <div className={styles.userSection}>
           <span className={styles.username}>{username}</span>
           <button onClick={handleLogout} className={styles.logoutButton}>Déconnexion</button>
+        </div>
+      ) : (
+        <div className={styles.loginSection}>
+          <Link href="/login">
+            <button className={styles.loginButton}>Se connecter</button>
+          </Link>
         </div>
       )}
     </nav>
