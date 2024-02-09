@@ -12,61 +12,59 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     const user = users.find(
       (u) => u.username === username && u.password === password
     );
-  
+
     if (user) {
-      Cookies.set('username', username, {
-        expires: 1, 
-        path: '/', 
+      Cookies.set("username", username, {
+        expires: 1,
+        path: "/",
       });
-      window.location.href = '/'; 
+      window.location.href = "/";
     } else {
-      setError('Identifiants incorrects')
+      setError("Identifiants incorrects");
     }
   };
   return (
     <Layout>
-    <div className={styles.pageBackground}>
-      <div className={styles.loginContainer}>
-        <form onSubmit={handleLogin}>
-          <div className={styles.formGroup}>
-            <label htmlFor="username" className={styles.formLabel}>
-              Nom dutilisateur
-            </label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className={styles.formInput}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="password" className={styles.formLabel}>
-              Mot de passe
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={styles.formInput}
-            />
-          </div>
-          {error && <p className={styles.errorMessage}>{error}</p>}
-          <div className={styles.formGroup}>
-            <button type="submit" className={styles.submitButton}>
-              Se connecter
-            </button>
-          </div>
-        </form>
-      </div>
+      <div className={styles.pageBackground}>
+        <div className={styles.loginContainer}>
+          <form onSubmit={handleLogin}>
+            <div className={styles.formGroup}>
+              <label htmlFor="username" className={styles.formLabel}>
+                Nom d&apos;utilisateur
+              </label>
+              <input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className={styles.formInput}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="password" className={styles.formLabel}>
+                Mot de passe
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={styles.formInput}
+              />
+            </div>
+            {error && <p className={styles.errorMessage}>{error}</p>}
+            <div className={styles.formGroup}>
+              <button type="submit" className={styles.submitButton}>
+                Se connecter
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </Layout>
   );
 }
-
-

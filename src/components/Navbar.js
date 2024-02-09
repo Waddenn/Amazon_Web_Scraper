@@ -1,28 +1,30 @@
 // components/Navbar.js
-import Link from 'next/link';
-import styles from '../styles/Navbar.module.css';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
+import Link from "next/link";
+import styles from "../styles/Navbar.module.css";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const router = useRouter();
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [username, setUsername] = useState('');
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [username, setUsername] = useState("");
 
-  const isCategoryPage = router.pathname.includes('/[category]');
+  const isCategoryPage = router.pathname.includes("/[category]");
 
   useEffect(() => {
-    const usernameFromCookie = Cookies.get('username');
+    const usernameFromCookie = Cookies.get("username");
     if (usernameFromCookie) {
       setUsername(usernameFromCookie);
     }
   }, []);
 
   const handleLogout = () => {
-    Cookies.remove('username');
-    router.push('/login');
+    Cookies.remove("username");
+    router.push("/login");
   };
 
   const handleSubmit = (e) => {
@@ -36,9 +38,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <Link href="/">
-          Amazon Web Scraper
-        </Link>
+        <Link href="/">Amazon Web Scraper</Link>
       </div>
       {isCategoryPage && (
         <form onSubmit={handleSubmit} className={styles.filterForm}>
@@ -56,13 +56,17 @@ const Navbar = () => {
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
           />
-          <button className={styles.filterButton} type="submit">Filtrer</button>
+          <button className={styles.filterButton} type="submit">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
         </form>
       )}
       {username ? (
         <div className={styles.userSection}>
           <span className={styles.username}>{username}</span>
-          <button onClick={handleLogout} className={styles.logoutButton}>Déconnexion</button>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            Déconnexion
+          </button>
         </div>
       ) : (
         <div className={styles.loginSection}>
