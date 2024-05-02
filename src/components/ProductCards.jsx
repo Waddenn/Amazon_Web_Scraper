@@ -1,9 +1,10 @@
-import Image from "next/image"
-import Link from "next/link"
-import styles from "../styles/ProductCard.module.css"
-import React, { useState } from "react"
+// components/ProductCard.js
+import Image from "next/image";
+import Link from "next/link";
+import styles from "../styles/ProductCard.module.css";
+import React from "react";
 
-const ProductCard = ({ product }) => (
+const ProductCard = ({ product, onDelete }) => (
   <div className={styles.card}>
     <Link href={product.url} passHref>
       <div className={styles.imageWrapper}>
@@ -14,13 +15,15 @@ const ProductCard = ({ product }) => (
           height={400}
         />
       </div>
-      <div className={styles.ratingWrapper}>
-        <span className={styles.rating}>{product.rating}</span>
-        <span className={styles.votes}>({product.votes} votes)</span>
-      </div>
-      <h3 className={styles.title}>{product.title}</h3>
-      <p className={styles.price}>{product.price}</p>
     </Link>
+    <div className={styles.ratingWrapper}>
+      <span className={styles.rating}>{product.rating}</span>
+      <span className={styles.votes}>({product.votes} votes)</span>
+    </div>
+    <h3 className={styles.title}>{product.title}</h3>
+    <p className={styles.price}>{product.price}</p>
+    <button onClick={() => onDelete(product)} className={styles.deleteButton}>Supprimer</button>
   </div>
-)
-export default ProductCard
+);
+
+export default ProductCard;
