@@ -78,7 +78,7 @@ const main = async () => {
           ?.getAttribute("title")
         const rating = ratingText ? ratingText.split(" ")[0] : null
         const votesText = element.querySelector(
-          ".a-icon-row .a-size-small"
+          ".a-icon-row .a-size-small",
         )?.textContent
         const votes = votesText ? votesText.replace(/[^\d]/g, "") : null
 
@@ -99,7 +99,7 @@ const main = async () => {
     allCategoriesProducts[category] = products
 
     await collection.insertMany(
-      products.map((product) => ({ ...product, category }))
+      products.map((product) => ({ ...product, category })),
     )
 
     await page.close()
