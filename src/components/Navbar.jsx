@@ -1,39 +1,40 @@
 // components/Navbar.js
-import Link from "next/link";
-import styles from "../styles/Navbar.module.css";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link"
+import styles from "@/styles/Navbar.module.css"
+import { useRouter } from "next/router"
+import { useState, useEffect } from "react"
+import Cookies from "js-cookie"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 const Navbar = () => {
-  const router = useRouter();
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [username, setUsername] = useState("");
+  const router = useRouter()
+  const [minPrice, setMinPrice] = useState("")
+  const [maxPrice, setMaxPrice] = useState("")
+  const [username, setUsername] = useState("")
 
-  const isCategoryPage = router.pathname.includes("/[category]");
+  const isCategoryPage = router.pathname.includes("/[category]")
 
   useEffect(() => {
-    const usernameFromCookie = Cookies.get("username");
+    const usernameFromCookie = Cookies.get("username")
     if (usernameFromCookie) {
-      setUsername(usernameFromCookie);
+      setUsername(usernameFromCookie)
     }
-  }, []);
+  }, [])
 
   const handleLogout = () => {
-    Cookies.remove("username");
-    router.push("/login");
-  };
+    Cookies.remove("username")
+    setUsername("")
+    router.push("/login")
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     router.push({
       pathname: router.pathname,
       query: { ...router.query, minPrice, maxPrice },
-    });
-  };
+    })
+  }
 
   return (
     <nav className={styles.navbar}>
@@ -79,9 +80,7 @@ const Navbar = () => {
         </div>
       )}
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
-
-
+export default Navbar
