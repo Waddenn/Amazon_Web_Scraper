@@ -74,8 +74,8 @@ const Navbar = () => {
         </div>
       ) : (
         <div className={styles.loginSection}>
-          <Link href="/login">
-            <button className={styles.loginButton}>Se connecter</button>
+          <Link href="/login" className={styles.loginLink}>
+            Se connecter
           </Link>
         </div>
       )}

@@ -127,7 +127,7 @@
   border-color: white;
 }
 
-.loginButton {
+.loginLink {
   margin-left: 1rem; 
   padding: 0.5rem 1rem;
   border: none;
@@ -142,7 +142,7 @@
   border: 1px solid transparent;
 }
 
-.loginButton:hover {
+.loginLink:hover {
   border-color: white;
 
 }
