@@ -2,12 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import Cookies from 'js-cookie';
 import styles from '../styles/ProductCard.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ProductCard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const user = Cookies.get('username');
+    setUsername(user);
+  }, []);
+
   const addToWishlist = async () => {
-    const username = Cookies.get('username');
     if (!username) {
       alert('Vous devez être connecté pour ajouter des articles à la wishlist.');
       return;
@@ -39,6 +45,7 @@ const ProductCard = ({ product }) => {
       alert('Une erreur est survenue lors de l\'ajout du produit à la wishlist.');
     }
   };
+
   return (
     <div className={styles.card}>
       <div className={styles.rank}>{product.rank}</div>
@@ -58,10 +65,13 @@ const ProductCard = ({ product }) => {
         <h3 className={styles.title}>{product.title}</h3>
         <p className={styles.price}>{product.price}</p>
       </Link>
-      <button onClick={addToWishlist} className={styles.wishlistButton} disabled={isInWishlist}>
-        {isInWishlist ? 'Dans la Wishlist' : 'Ajouter à la Wishlist'}
-      </button>
+      {username && (
+        <button onClick={addToWishlist} className={styles.wishlistButton} disabled={isInWishlist}>
+          {isInWishlist ? 'Dans la Wishlist' : 'Ajouter à la Wishlist'}
+        </button>
+      )}
     </div>
   );
 };
+
 export default ProductCard;

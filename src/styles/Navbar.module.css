@@ -166,3 +166,8 @@
 .wishlistLink:hover {
   border-color: white;
 }
+
+.main {
+  height: 100vh;
+  background-color: #e3e6e6;
+}
