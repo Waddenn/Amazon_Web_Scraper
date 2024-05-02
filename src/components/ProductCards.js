@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Cookies from 'js-cookie';
 import styles from '../styles/ProductCard.module.css';
 import React, { useState } from 'react';
 

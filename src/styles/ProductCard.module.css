@@ -1,15 +1,18 @@
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     padding: 2vh;
-    width:fit-content;
+    width: fit-content;
     position: relative;
     background-color: white;
-  }
-  
+}
+
 .card:hover {
   transform: translateY(-5px);
 }
@@ -39,6 +42,7 @@
   padding: 4px 12px;
   margin-bottom: 12px;
 }
+
 .rank {
   position: absolute; 
   top: 0; 
@@ -66,4 +70,10 @@
 .votes {
   color: #777;
   font-size: 0.9rem;
+}
+
+.wishlistButton {
+  align-self: center;
+  padding: 8px 0x; 
+  margin-top: auto; 
 }
