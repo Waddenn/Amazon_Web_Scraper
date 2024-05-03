@@ -4,7 +4,9 @@ import Cookies from "js-cookie"
 import styles from "@/styles/ProductCard.module.css"
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
-
+import Tippy from "@tippyjs/react"
+import "tippy.js/dist/tippy.css"
+import "tippy.js/themes/light-border.css"
 // eslint-disable-next-line max-lines-per-function
 const ProductCard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false)
@@ -68,12 +70,14 @@ const ProductCard = ({ product }) => {
         </div>
         <h3 className={styles.title}>{product.title}</h3>
       </Link>
-      <p
-        className={`${styles.price} ${styles.clickable}`}
-        onClick={() => router.push(`/product/${product.asin}`)}
-      >
-        {product.price}
-      </p>
+      <Tippy content="Afficher l'historique des prix" theme="light-border">
+        <p
+          className={`${styles.price} ${styles.clickable}`}
+          onClick={() => router.push(`/product/${product.asin}`)}
+        >
+          {product.price}
+        </p>
+      </Tippy>
       {username && (
         <button
           onClick={addToWishlist}
