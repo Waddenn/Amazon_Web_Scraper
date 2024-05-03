@@ -3,11 +3,13 @@ import Link from "next/link"
 import Cookies from "js-cookie"
 import styles from "@/styles/ProductCard.module.css"
 import React, { useState, useEffect } from "react"
+import { useRouter } from "next/router"
 
 // eslint-disable-next-line max-lines-per-function
 const ProductCard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false)
   const [username, setUsername] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     const user = Cookies.get("username")
@@ -65,7 +67,12 @@ const ProductCard = ({ product }) => {
           <span className={styles.votes}>({product.votes} votes)</span>
         </div>
         <h3 className={styles.title}>{product.title}</h3>
-        <p className={styles.price}>{product.price}</p>
+        <p
+          className={styles.price}
+          onClick={() => router.push(`/product/${product.asin}`)}
+        >
+          {product.price}
+        </p>
       </Link>
       {username && (
         <button
