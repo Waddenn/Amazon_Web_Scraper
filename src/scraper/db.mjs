@@ -53,7 +53,7 @@ const main = async () => {
   for (const category of categories) {
     const page = await browser.newPage()
     await page.goto(`https://www.amazon.fr/gp/bestsellers/${category}/`)
-    await setTimeout(3000)
+    await setTimeout(1000)
 
     const products = await page.evaluate(() => {
       let items = []
@@ -82,6 +82,8 @@ const main = async () => {
         )?.textContent
         const votes = votesText ? votesText.replace(/[^\d]/g, "") : null
 
+        const asin = url.match(/\/dp\/(\w{10})/)[1]
+
         items.push({
           rank,
           title,
@@ -90,6 +92,7 @@ const main = async () => {
           price,
           rating,
           votes,
+          asin,
         })
       }
 
@@ -110,6 +113,7 @@ const main = async () => {
   console.log("Successfully updated the database with the products")
   await getProductList_json()
 }
+
 main()
 
 export default main
