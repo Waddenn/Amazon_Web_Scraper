@@ -1,0 +1,12 @@
+.productDetail {
+  max-width: 100%;
+  padding-top: 15vh;
+  background-color: #e3e6e6;
+  display: flex;
+  justify-content: center;
+}
+
+.chartImage {
+  max-width: 90%;
+  height: auto;
+}
