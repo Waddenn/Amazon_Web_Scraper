@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 import Tippy from "@tippyjs/react"
 import "tippy.js/dist/tippy.css"
 import "tippy.js/themes/light-border.css"
-// eslint-disable-next-line max-lines-per-function
+
 const ProductCard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false)
   const [username, setUsername] = useState(null)
