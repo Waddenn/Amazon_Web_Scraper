@@ -1,50 +1,52 @@
-import Image from "next/image";
-import Link from "next/link";
-import Cookies from 'js-cookie';
-import styles from '../styles/ProductCard.module.css';
-import React, { useState, useEffect } from 'react';
+import Image from "next/image"
+import Link from "next/link"
+import Cookies from "js-cookie"
+import styles from "@/styles/ProductCard.module.css"
+import React, { useState, useEffect } from "react"
 
+// eslint-disable-next-line max-lines-per-function
 const ProductCard = ({ product }) => {
-  const [isInWishlist, setIsInWishlist] = useState(false);
-  const [username, setUsername] = useState(null);
+  const [isInWishlist, setIsInWishlist] = useState(false)
+  const [username, setUsername] = useState(null)
 
   useEffect(() => {
-    const user = Cookies.get('username');
-    setUsername(user);
-  }, []);
+    const user = Cookies.get("username")
+    setUsername(user)
+  }, [])
 
   const addToWishlist = async () => {
     if (!username) {
-      alert('Vous devez être connecté pour ajouter des articles à la wishlist.');
-      return;
+      alert("Vous devez être connecté pour ajouter des articles à la wishlist.")
+
+      return
     }
 
     try {
-      const response = await fetch('/api/addToWishlist', {
-        method: 'POST',
+      const response = await fetch("/api/addToWishlist", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           product,
           username,
         }),
-      });
+      })
+      const data = await response.json()
 
-      const data = await response.json();
       if (response.ok) {
-        setIsInWishlist(true); 
+        setIsInWishlist(true)
       } else if (response.status === 409) {
-        setIsInWishlist(true); 
-        alert('Produit déjà dans la wishlist');
+        setIsInWishlist(true)
+        alert("Produit déjà dans la wishlist")
       } else {
-        alert(data.message || 'Une erreur est survenue');
+        alert(data.message || "Une erreur est survenue")
       }
     } catch (error) {
-      console.error('Erreur lors de l\'ajout du produit à la wishlist:', error);
-      alert('Une erreur est survenue lors de l\'ajout du produit à la wishlist.');
+      console.error("Erreur lors de l'ajout du produit à la wishlist:", error)
+      alert("Une erreur est survenue lors de l'ajout du produit à la wishlist.")
     }
-  };
+  }
 
   return (
     <div className={styles.card}>
@@ -66,12 +68,16 @@ const ProductCard = ({ product }) => {
         <p className={styles.price}>{product.price}</p>
       </Link>
       {username && (
-        <button onClick={addToWishlist} className={styles.wishlistButton} disabled={isInWishlist}>
-          {isInWishlist ? 'Dans la Wishlist' : 'Ajouter à la Wishlist'}
+        <button
+          onClick={addToWishlist}
+          className={styles.wishlistButton}
+          disabled={isInWishlist}
+        >
+          {isInWishlist ? "Dans la Wishlist" : "Ajouter à la Wishlist"}
         </button>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ProductCard;
+export default ProductCard

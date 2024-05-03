@@ -1,37 +1,7 @@
 import CategoryButton from "@/components/CategoryButton"
 import styles from "@/styles/Home.module.css"
+import { categoryNames } from "@/utils/constants"
 import { useEffect } from "react"
-
-const categoryPaths = {
-  "Sports et Loisirs": "sports",
-  Mode: "fashion",
-  "Luminaires et Éclairage": "lighting",
-  Logiciels: "software",
-  Livres: "books",
-  "Jeux vidéo": "videogames",
-  "Jeux et Jouets": "toys",
-  Jardin: "lawn-garden",
-  "Instruments de musique et Sono": "musical-instruments",
-  Informatique: "computers",
-  "Hygiène et Santé": "hpc",
-  "High-Tech": "electronics",
-  "Gros électroménager": "appliances",
-  "Fournitures de bureau": "officeproduct",
-  Epicerie: "grocery",
-  "DVD et Blu-ray": "dvd",
-  "Cuisine et Maison": "kitchen",
-  "Commerce, Industrie et Science": "industrial",
-  "Engagement en faveur du climat": "climate-pledge",
-  "CD et Vinyles": "music",
-  Bricolage: "hi",
-  Kindle: "digital-text",
-  "Cartes cadeaux": "gift-cards",
-  "Beauté et Parfum": "beauty",
-  "Auto et Moto": "automotive",
-  "Applis et Jeux": "mobile-apps",
-  "Appareils Amazon et Accessoires": "amazon-devices",
-  Animalerie: "pet-supplies",
-}
 
 const Home = () => {
   useEffect(() => {
@@ -44,7 +14,7 @@ const Home = () => {
   return (
     <div className={styles.categoriesContainer}>
       <div className={styles.productGrid1}>
-        {Object.entries(categoryPaths).map(([category, path]) => (
+        {Object.entries(categoryNames).map(([path, category]) => (
           <CategoryButton
             key={category}
             categoryName={category}

@@ -1,19 +1,18 @@
-// pages/login.js
 import { useState } from "react"
 import users from "../../data/users.json"
 import styles from "../../styles/login.module.css"
 import Cookies from "js-cookie"
 
-export default function Login() {
+// eslint-disable-next-line max-lines-per-function
+const LoginPage = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault()
 
     const user = users.find(
-      (u) => u.username === username && u.password === password
+      (u) => u.username === username && u.password === password,
     )
 
     if (user) {
@@ -26,6 +25,7 @@ export default function Login() {
       setError("Identifiants incorrects")
     }
   }
+
   return (
     <div className={styles.pageBackground}>
       <div className={styles.loginContainer}>
@@ -65,3 +65,5 @@ export default function Login() {
     </div>
   )
 }
+
+export default LoginPage

@@ -1,4 +1,3 @@
-// components/Navbar.js
 import Link from "next/link"
 import styles from "@/styles/Navbar.module.css"
 import { useRouter } from "next/router"
@@ -7,16 +6,17 @@ import Cookies from "js-cookie"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
+// eslint-disable-next-line max-lines-per-function
 const Navbar = () => {
   const router = useRouter()
   const [minPrice, setMinPrice] = useState("")
   const [maxPrice, setMaxPrice] = useState("")
   const [username, setUsername] = useState("")
-
   const isCategoryPage = router.pathname.includes("/[category]")
 
   useEffect(() => {
     const usernameFromCookie = Cookies.get("username")
+
     if (usernameFromCookie) {
       setUsername(usernameFromCookie)
     }
@@ -27,7 +27,6 @@ const Navbar = () => {
     setUsername("")
     router.push("/login")
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     router.push({

@@ -1,39 +1,8 @@
-// pages/index.js
 import React from "react"
-import ProductCard from "../../components/ProductCard"
-import styles from "../../styles/Home.module.css"
+import ProductCard from "@/components/ProductCard"
+import styles from "@/styles/Home.module.css"
 import getProductList from "@/db/getProductList"
-
-const categoryNames = {
-  sports: "Sports et Loisirs",
-  fashion: "Mode",
-  lighting: "Luminaires et Éclairage",
-  software: "Logiciels",
-  books: "Livres",
-  videogames: "Jeux vidéo",
-  toys: "Jeux et Jouets",
-  "lawn-garden": "Jardin",
-  "musical-instruments": "Instruments de musique et Sono",
-  computers: "Informatique",
-  hpc: "Hygiène et Santé",
-  electronics: "High-Tech",
-  appliances: "Gros électroménager",
-  officeproduct: "Fournitures de bureau",
-  grocery: "Epicerie",
-  dvd: "DVD et Blu-ray",
-  kitchen: "Cuisine et Maison",
-  industrial: "Commerce, Industrie et Science",
-  "climate-pledge": "Engagement en faveur du climat",
-  music: "CD et Vinyles",
-  hi: "Bricolage",
-  "digital-text": "Kindle",
-  "gift-cards": "Cartes cadeaux",
-  beauty: "Beauté et Parfum",
-  automotive: "Auto et Moto",
-  "mobile-apps": "Applis et Jeux",
-  "amazon-devices": "Appareils Amazon et Accessoires",
-  "pet-supplies": "Animalerie",
-}
+import { categoryNames } from "@/utils/constants"
 
 export const getServerSideProps = async (context) => {
   const { category, minPrice, maxPrice } = context.query
@@ -42,8 +11,7 @@ export const getServerSideProps = async (context) => {
 
   return { props: { list, categoryName } }
 }
-
-const Category = ({ list, categoryName }) => (
+const CategoryPage = ({ list, categoryName }) => (
   <div className={styles.container}>
     <h1 className={styles.title}>Les meilleures ventes en {categoryName}</h1>
     <div className={styles.productGrid}>
@@ -54,4 +22,4 @@ const Category = ({ list, categoryName }) => (
   </div>
 )
 
-export default Category
+export default CategoryPage

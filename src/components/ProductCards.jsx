@@ -1,8 +1,7 @@
-// components/ProductCard.js
-import Image from "next/image";
-import Link from "next/link";
-import styles from "../styles/ProductCard.module.css";
-import React from "react";
+import Image from "next/image"
+import Link from "next/link"
+import styles from "@/styles/ProductCard.module.css"
+import React from "react"
 
 const ProductCard = ({ product, onDelete }) => (
   <div className={styles.card}>
@@ -22,8 +21,10 @@ const ProductCard = ({ product, onDelete }) => (
     </div>
     <h3 className={styles.title}>{product.title}</h3>
     <p className={styles.price}>{product.price}</p>
-    <button onClick={() => onDelete(product)} className={styles.deleteButton}>Supprimer</button>
+    <button onClick={() => onDelete(product)} className={styles.deleteButton}>
+      Supprimer
+    </button>
   </div>
-);
+)
 
-export default ProductCard;
+export default ProductCard

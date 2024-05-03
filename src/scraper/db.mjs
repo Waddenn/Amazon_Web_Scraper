@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { MongoClient } from "mongodb"
 import puppeteer from "puppeteer"
 import { setTimeout } from "timers/promises"
@@ -38,9 +39,8 @@ const categories = [
 dotenv.config()
 const uri = process.env.COSMOSDB_CONNECTION_STRING
 const client = new MongoClient(uri)
-
-let allCategoriesProducts = {}
-
+const allCategoriesProducts = {}
+// eslint-disable-next-line max-lines-per-function
 const main = async () => {
   await client.connect()
   const database = client.db("amazon-scrapper")
@@ -56,13 +56,14 @@ const main = async () => {
     await setTimeout(1000)
 
     const products = await page.evaluate(() => {
-      let items = []
+      const items = []
       const productElements = document.querySelectorAll("[data-asin]")
 
-      for (let element of productElements) {
+      for (const element of productElements) {
         if (items.length >= 30) {
           break
         }
+
         const rank = element.querySelector(".zg-bdg-text")?.textContent
         const title = element
           .querySelector(".a-link-normal > span > div")
@@ -72,7 +73,6 @@ const main = async () => {
         const price = element
           .querySelector(".a-link-normal > div > span > span")
           ?.textContent.trim()
-
         const ratingText = element
           .querySelector(".a-icon-row .a-link-normal")
           ?.getAttribute("title")
@@ -80,9 +80,9 @@ const main = async () => {
         const votesText = element.querySelector(
           ".a-icon-row .a-size-small",
         )?.textContent
-        const votes = votesText ? votesText.replace(/[^\d]/g, "") : null
-
-        const asin = url.match(/\/dp\/(\w{10})/)[1]
+        const votes = votesText ? votesText.replace(/[^\d]/gu, "") : null
+        // eslint-disable-next-line prefer-destructuring
+        const asin = url.match(/\/dp\/(\w{10})/u)[1]
 
         items.push({
           rank,

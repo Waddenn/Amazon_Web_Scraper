@@ -10,20 +10,23 @@ const getProductList = async (category, minPrice, maxPrice) => {
   if (minPrice) {
     list = list.filter(
       (product) =>
-        parseFloat(product.price.replace(/[^0-9,]/g, "").replace(",", ".")) >=
+        parseFloat(product.price.replace(/[^0-9,]/gu, "").replace(",", ".")) >=
         parseFloat(minPrice),
     )
   }
+
   if (maxPrice) {
     list = list.filter(
       (product) =>
-        parseFloat(product.price.replace(/[^0-9,]/g, "").replace(",", ".")) <=
+        parseFloat(product.price.replace(/[^0-9,]/gu, "").replace(",", ".")) <=
         parseFloat(maxPrice),
     )
   }
+
   list.sort((a, b) => {
     const rankA = parseInt(a.rank.replace("#", ""), 10)
     const rankB = parseInt(b.rank.replace("#", ""), 10)
+
     return rankA - rankB
   })
 

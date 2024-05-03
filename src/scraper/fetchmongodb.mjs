@@ -3,9 +3,10 @@ import { writeFile } from "fs/promises"
 import dotenv from "dotenv"
 dotenv.config()
 
-export const getProductList_json = async () => {
+export const getProductListJson = async () => {
   const uri = process.env.COSMOSDB_CONNECTION_STRING
   const client = new MongoClient(uri)
+
   try {
     await client.connect()
     const database = client.db("amazon-scrapper")
@@ -18,6 +19,7 @@ export const getProductList_json = async () => {
     console.log(
       "Data has been written to top_products_by_category.json successfully",
     )
+
     return list
   } catch (error) {
     console.error("An error occurred:", error)
