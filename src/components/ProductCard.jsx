@@ -67,13 +67,13 @@ const ProductCard = ({ product }) => {
           <span className={styles.votes}>({product.votes} votes)</span>
         </div>
         <h3 className={styles.title}>{product.title}</h3>
-        <p
-          className={styles.price}
-          onClick={() => router.push(`/product/${product.asin}`)}
-        >
-          {product.price}
-        </p>
       </Link>
+      <p
+        className={`${styles.price} ${styles.clickable}`}
+        onClick={() => router.push(`/product/${product.asin}`)}
+      >
+        {product.price}
+      </p>
       {username && (
         <button
           onClick={addToWishlist}
