@@ -2,7 +2,7 @@
 import { MongoClient } from "mongodb"
 import puppeteer from "puppeteer"
 import { setTimeout } from "timers/promises"
-import { getProductList_json } from "./fetchmongodb.mjs"
+import { getProductListJson } from "./fetchmongodb.mjs"
 import dotenv from "dotenv"
 
 const categories = [
@@ -111,7 +111,7 @@ const main = async () => {
   await browser.close()
   await client.close()
   console.log("Successfully updated the database with the products")
-  await getProductList_json()
+  await getProductListJson()
 }
 
 main()
