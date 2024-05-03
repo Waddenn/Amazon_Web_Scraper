@@ -12,7 +12,6 @@ const Navbar = () => {
   const [maxPrice, setMaxPrice] = useState("")
   const [username, setUsername] = useState("")
   const [period, setPeriod] = useState(router.query.tp || "1y")
-  const [priceType, setPriceType] = useState(router.query.cpf || "amazon")
   const isCategoryPage = router.pathname.includes("/[category]")
   const isProductPage = router.pathname.includes("/product")
 
@@ -28,13 +27,13 @@ const Navbar = () => {
       router.push(
         {
           pathname: router.pathname,
-          query: { ...router.query, tp: period, cpf: priceType },
+          query: { ...router.query, tp: period },
         },
         undefined,
         { shallow: true },
       )
     }
-  }, [period, priceType, isProductPage])
+  }, [period, isProductPage])
 
   const handleLogout = () => {
     Cookies.remove("username")
@@ -83,20 +82,11 @@ const Navbar = () => {
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
           >
-            <option value="all">All time</option>
-            <option value="1y">Last year</option>
-            <option value="6m">Last 6 months</option>
-            <option value="3m">Last 3 months</option>
-            <option value="1m">Last month</option>
-          </select>
-          <select
-            className={styles.filterSelect}
-            value={priceType}
-            onChange={(e) => setPriceType(e.target.value)}
-          >
-            <option value="amazon">Amazon</option>
-            <option value="new-used">New & Used</option>
-            <option value="used">Used</option>
+            <option value="all">Depuis toujours</option>
+            <option value="1y">L'année dernière</option>
+            <option value="6m">Les 6 derniers mois</option>
+            <option value="3m">Les 3 derniers mois</option>
+            <option value="1m">Le mois dernier</option>
           </select>
         </form>
       )}
@@ -107,13 +97,13 @@ const Navbar = () => {
             Wishlist
           </Link>
           <button onClick={handleLogout} className={styles.logoutButton}>
-            Log out
+            Se déconnecter
           </button>
         </div>
       ) : (
         <div className={styles.loginSection}>
           <Link href="/login" className={styles.loginLink}>
-            Log in
+            Se connecter
           </Link>
         </div>
       )}

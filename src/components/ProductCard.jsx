@@ -3,7 +3,6 @@ import Link from "next/link"
 import Cookies from "js-cookie"
 import styles from "@/styles/ProductCard.module.css"
 import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
 import Tippy from "@tippyjs/react"
 import "tippy.js/dist/tippy.css"
 import "tippy.js/themes/light-border.css"
@@ -11,7 +10,6 @@ import "tippy.js/themes/light-border.css"
 const ProductCard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false)
   const [username, setUsername] = useState(null)
-  const router = useRouter()
 
   useEffect(() => {
     const user = Cookies.get("username")
@@ -70,14 +68,13 @@ const ProductCard = ({ product }) => {
         </div>
         <h3 className={styles.title}>{product.title}</h3>
       </Link>
-      <Tippy content="Afficher l'historique des prix" theme="light-border">
-        <p
-          className={`${styles.price} ${styles.clickable}`}
-          onClick={() => router.push(`/product/${product.asin}`)}
-        >
-          {product.price}
-        </p>
-      </Tippy>
+      <Link href={`/product/${product.asin}`} passHref>
+        <Tippy content="Afficher l'historique des prix" theme="light-border">
+          <p className={`${styles.price} ${styles.clickable}`}>
+            {product.price}
+          </p>
+        </Tippy>
+      </Link>
       {username && (
         <button
           onClick={addToWishlist}
