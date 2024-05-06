@@ -1,3 +1,4 @@
+import { FaRegBookmark, FaBookmark } from "react-icons/fa"
 import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -40,11 +41,9 @@ const ProductCard = ({ product }) => {
       return
     }
 
-    const params = new URLSearchParams({ username })
-
     try {
       const response = await fetch(
-        `http://localhost:3000/api/wishlist?${params.toString()}`,
+        `http://localhost:3000/api/wishlist?username=${username}`,
         {
           method: "POST",
           headers: {
@@ -81,12 +80,12 @@ const ProductCard = ({ product }) => {
             height={400}
           />
         </div>
-        <div className={styles.ratingWrapper}>
-          <span className={styles.rating}>{product.rating}</span>
-          <span className={styles.votes}>({product.votes} votes)</span>
-        </div>
-        <h3 className={styles.title}>{product.title}</h3>
       </Link>
+      <div className={styles.ratingWrapper}>
+        <span className={styles.rating}>{product.rating}</span>
+        <span className={styles.votes}>({product.votes} votes)</span>
+      </div>
+      <h3 className={styles.title}>{product.title}</h3>
       <Link href={`/product/${product.asin}`} passHref>
         <Tippy content="Afficher l'historique des prix" theme="light-border">
           <p className={`${styles.price} ${styles.clickable}`}>
@@ -94,15 +93,13 @@ const ProductCard = ({ product }) => {
           </p>
         </Tippy>
       </Link>
-      {username && (
-        <button
-          onClick={addToWishlist}
-          className={styles.wishlistButton}
-          disabled={isInWishlist}
-        >
-          {isInWishlist ? "Dans la Wishlist" : "Ajouter à la Wishlist"}
-        </button>
-      )}
+      <div className={styles.bookmarkIcon} onClick={addToWishlist}>
+        {isInWishlist ? (
+          <FaBookmark size={24} color="#e44d26" />
+        ) : (
+          <FaRegBookmark size={24} />
+        )}
+      </div>
     </div>
   )
 }
