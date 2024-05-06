@@ -1,6 +1,8 @@
 import Link from "next/link"
 import Tippy from "@tippyjs/react"
 import styles from "@/styles/ProductCard.module.css"
+import "tippy.js/themes/light-border.css"
+
 const ProductInfo = ({ product }) => (
   <>
     <div className={styles.ratingWrapper}>
@@ -8,14 +10,9 @@ const ProductInfo = ({ product }) => (
       <span className={styles.votes}>({product.votes} votes)</span>
     </div>
     <h3 className={styles.title}>{product.title}</h3>
-    <Link href={`/product/${product.asin}`} passHref>
-      <Tippy
-        content="Afficher l'historique des prix"
-        theme="light-border"
-        placement="bottom"
-        offset={[0]}
-      >
-        <div className={`${styles.price} ${styles.clickable}`}>
+    <Link href={`/product/${product.asin}`} className="flex" passHref>
+      <Tippy content="Afficher l'historique des prix" theme="light-border">
+        <div className={`${styles.price}`}>
           {product.price ? product.price : "Pas de prix connue"}
         </div>
       </Tippy>
