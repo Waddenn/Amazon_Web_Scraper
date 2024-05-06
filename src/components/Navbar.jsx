@@ -6,6 +6,7 @@ import Cookies from "js-cookie"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
+// eslint-disable-next-line max-lines-per-function
 const Navbar = () => {
   const router = useRouter()
   const [minPrice, setMinPrice] = useState("")
@@ -17,6 +18,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const usernameFromCookie = Cookies.get("username")
+
     if (usernameFromCookie) {
       setUsername(usernameFromCookie)
     }
@@ -40,7 +42,6 @@ const Navbar = () => {
     setUsername("")
     router.push("/login")
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     router.push({

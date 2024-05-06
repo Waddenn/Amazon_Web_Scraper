@@ -7,6 +7,7 @@ import Tippy from "@tippyjs/react"
 import "tippy.js/dist/tippy.css"
 import "tippy.js/themes/light-border.css"
 
+// eslint-disable-next-line max-lines-per-function
 const ProductCard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false)
   const [username, setUsername] = useState(null)
@@ -23,17 +24,21 @@ const ProductCard = ({ product }) => {
       return
     }
 
+    const params = new URLSearchParams({ username })
+
     try {
-      const response = await fetch("/api/addToWishlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `http://localhost:3000/api/wishlist?${params.toString()}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product,
+          }),
         },
-        body: JSON.stringify({
-          product,
-          username,
-        }),
-      })
+      )
       const data = await response.json()
 
       if (response.ok) {

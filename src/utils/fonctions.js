@@ -1,14 +1,8 @@
-import { readFile } from "node:fs/promises"
-
-const getProductList = async (category, minPrice, maxPrice) => {
-  const json = JSON.parse(
-    await readFile("./top_products_by_category.json", { encoding: "utf-8" }),
-  )
-
-  let list = json.filter((product) => product.category === category)
+export const productListFilter = (productList, minPrice, maxPrice) => {
+  let productListFilted = [...productList]
 
   if (minPrice) {
-    list = list.filter(
+    productListFilted = productListFilted.filter(
       (product) =>
         parseFloat(product.price.replace(/[^0-9,]/gu, "").replace(",", ".")) >=
         parseFloat(minPrice),
@@ -16,21 +10,19 @@ const getProductList = async (category, minPrice, maxPrice) => {
   }
 
   if (maxPrice) {
-    list = list.filter(
+    productListFilted = productListFilted.filter(
       (product) =>
         parseFloat(product.price.replace(/[^0-9,]/gu, "").replace(",", ".")) <=
         parseFloat(maxPrice),
     )
   }
 
-  list.sort((a, b) => {
+  productListFilted.sort((a, b) => {
     const rankA = parseInt(a.rank.replace("#", ""), 10)
     const rankB = parseInt(b.rank.replace("#", ""), 10)
 
     return rankA - rankB
   })
 
-  return list
+  return productListFilted
 }
-
-export default getProductList

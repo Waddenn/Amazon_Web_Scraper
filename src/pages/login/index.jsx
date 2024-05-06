@@ -1,6 +1,6 @@
 import { useState } from "react"
-import users from "../../data/users.json"
-import styles from "../../styles/login.module.css"
+import users from "@/data/users.json"
+import styles from "@/styles/login.module.css"
 import Cookies from "js-cookie"
 
 // eslint-disable-next-line max-lines-per-function

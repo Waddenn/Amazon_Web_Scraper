@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import ProductCard from "@/components/ProductCards"
 import styles from "@/styles/Home.module.css"
-import getProductList from "@/db/getProductListForWishList"
 import { parseCookies } from "nookies"
+import { productListFilter } from "@/utils/fonctions"
+import axios from "axios"
 
 export const getServerSideProps = async (context) => {
   const cookies = parseCookies(context)
@@ -13,21 +14,24 @@ export const getServerSideProps = async (context) => {
   }
 
   const { minPrice, maxPrice } = context.query
-  const list = await getProductList(username, minPrice, maxPrice)
+  const params = new URLSearchParams({ username })
+  const { data: list } = await axios(
+    `http://localhost:3000/api/wishlist?${params.toString()}`,
+  )
+  const listFilted = productListFilter(list, minPrice, maxPrice)
 
-  return { props: { initialList: list } }
+  return { props: { initialList: listFilted } }
 }
 const Home = ({ initialList }) => {
   const [list, setList] = useState(initialList)
   const handleDelete = async (productId) => {
     const { username } = parseCookies()
-    const response = await fetch("/api/removeFromWishlist", {
+    const response = await fetch(`/api/wishlist/${productId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        productId,
         username,
       }),
     })
