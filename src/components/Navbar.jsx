@@ -95,7 +95,9 @@ const Navbar = () => {
       )}
       {username ? (
         <div className={styles.userSection}>
-          <span className={styles.username}>{username}</span>
+          <Link href="/account" className={styles.usernameLink}>
+            <span className={styles.username}>{username}</span>
+          </Link>
           <Link href="/wishlist" className={styles.wishlistLink}>
             Wishlist
           </Link>
