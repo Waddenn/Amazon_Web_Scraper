@@ -1,20 +1,15 @@
 export const checkWishlist = async (user, productID) => {
-  const response = await fetch(
-    `http://localhost:3000/api/wishlist?username=${user}`,
-  )
+  const response = await fetch(`/api/wishlist?username=${user}`)
   const wishlist = await response.json()
 
   return wishlist.some((item) => item._id === productID)
 }
 export const toggleWishlist = async (username, product) => {
-  const response = await fetch(
-    `http://localhost:3000/api/wishlist?username=${username}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ product }),
-    },
-  )
+  const response = await fetch(`/api/wishlist?username=${username}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ product }),
+  })
 
   return response.json()
 }
