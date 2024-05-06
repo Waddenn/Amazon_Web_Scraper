@@ -1,36 +1,36 @@
 import { useState } from "react"
-import users from "@/data/users.json"
 import styles from "@/styles/login.module.css"
 import Cookies from "js-cookie"
-import Link from "next/link" // Importation de Link pour la navigation
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
 
-  const handleLogin = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
 
-    const user = users.find(
-      (u) => u.username === username && u.password === password,
-    )
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    })
 
-    if (user) {
-      Cookies.set("username", username, {
-        expires: 1,
-        path: "/",
-      })
+    if (response.ok) {
+      const data = await response.json()
+      Cookies.set("username", username, { expires: 1, path: "/" })
       window.location.href = "/"
     } else {
-      setError("Identifiants incorrects")
+      setError("Impossible de créer le compte")
     }
   }
 
   return (
     <div className={styles.pageBackground}>
       <div className={styles.loginContainer}>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
           <div className={styles.formGroup}>
             <label htmlFor="username" className={styles.formLabel}>
               Nom d&apos;utilisateur
@@ -58,16 +58,8 @@ const LoginPage = () => {
           {error && <p className={styles.errorMessage}>{error}</p>}
           <div className={styles.formGroup}>
             <button type="submit" className={styles.submitButton}>
-              Se connecter
+              Créer un compte
             </button>
-          </div>
-          <div className={styles.registerLink}>
-            <p>
-              Vous n'avez pas de compte ?{" "}
-              <Link href="/register" className={styles.registerButton}>
-                Créer un compte
-              </Link>
-            </p>
           </div>
         </form>
       </div>
@@ -75,4 +67,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage

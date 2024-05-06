@@ -1,69 +1,80 @@
 /* styles/login.module.css */
 
 .pageBackground {
-    background-color: #e7e7e7; 
-    height: 100vh;
-    width: 100vw;
-  }
+  background-color: #e7e7e7;
+  height: 100vh;
+  width: 100vw;
+}
 
 .loginContainer {
-    margin: 2rem auto;
-    padding: 2rem;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: white;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30vw;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;
 }
 
 .formGroup {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .formLabel {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .formInput {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #333;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
 }
 
 .formInput:focus {
-    outline: none;
-    border-color: #0070f3;
-    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.5);
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.5);
 }
 
 .errorMessage {
-    color: #d32f2f;
-    margin-top: -1rem;
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
+  color: #d32f2f;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
 }
 
 .submitButton {
-    width: 100%;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #232f3e;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #232f3e;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .submitButton:hover {
-    background-color: #131921;
+  background-color: #131921;
+}
+
+.registerLink {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.registerButton {
+  color: #0070f3;
+  text-decoration: underline;
+  cursor: pointer;
 }
