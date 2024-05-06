@@ -9,7 +9,12 @@ const ProductInfo = ({ product }) => (
     </div>
     <h3 className={styles.title}>{product.title}</h3>
     <Link href={`/product/${product.asin}`} passHref>
-      <Tippy content="Afficher l'historique des prix" theme="light-border">
+      <Tippy
+        content="Afficher l'historique des prix"
+        theme="light-border"
+        placement="bottom"
+        offset={[0]}
+      >
         <div className={`${styles.price} ${styles.clickable}`}>
           {product.price ? product.price : "Pas de prix connue"}
         </div>
