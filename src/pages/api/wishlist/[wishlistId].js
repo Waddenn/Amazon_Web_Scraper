@@ -1,7 +1,8 @@
 import { readJson, writeJson } from "@/db/Json"
 
 const handler = async (req, res) => {
-  const { wishlistId, username } = req.query
+  const { wishlistId } = req.query
+  const { username } = req.body
 
   if (!username) {
     return res.status(400).json({ message: "Username is required" })
