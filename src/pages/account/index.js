@@ -40,7 +40,7 @@ const AccountSettingsPage = () => {
 
     if (response.ok) {
       Cookies.remove("username")
-      window.location.href = "/login" // Rediriger vers la page de connexion après la suppression du compte
+      window.location.href = "/"
     } else {
       setError("Impossible de supprimer le compte")
     }
