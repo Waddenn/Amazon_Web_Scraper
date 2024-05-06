@@ -1,28 +1,33 @@
-export const productListFilter = (productList, minPrice, maxPrice) => {
-  let productListFilted = [...productList]
+export const filterProductList = (productList, minPrice, maxPrice) => {
+  let filteredProductList = [...productList]
 
-  if (minPrice) {
-    productListFilted = productListFilted.filter(
-      (product) =>
-        parseFloat(product.price.replace(/[^0-9,]/gu, "").replace(",", ".")) >=
-        parseFloat(minPrice),
-    )
-  }
-
-  if (maxPrice) {
-    productListFilted = productListFilted.filter(
-      (product) =>
-        parseFloat(product.price.replace(/[^0-9,]/gu, "").replace(",", ".")) <=
-        parseFloat(maxPrice),
-    )
-  }
-
-  productListFilted.sort((a, b) => {
+  filteredProductList.sort((a, b) => {
     const rankA = parseInt(a.rank.replace("#", ""), 10)
     const rankB = parseInt(b.rank.replace("#", ""), 10)
-
     return rankA - rankB
   })
 
-  return productListFilted
+  if (minPrice || maxPrice) {
+    filteredProductList = filteredProductList.filter(
+      (product) => product?.price && typeof product.price === "string",
+    )
+    const sanitizePrice = (price) =>
+      parseFloat(price.replace(/[^0-9,]/gu, "").replace(",", "."))
+
+    if (minPrice) {
+      const minPriceValue = parseFloat(minPrice)
+      filteredProductList = filteredProductList.filter(
+        (product) => sanitizePrice(product.price) >= minPriceValue,
+      )
+    }
+
+    if (maxPrice) {
+      const maxPriceValue = parseFloat(maxPrice)
+      filteredProductList = filteredProductList.filter(
+        (product) => sanitizePrice(product.price) <= maxPriceValue,
+      )
+    }
+  }
+
+  return filteredProductList
 }
