@@ -28,14 +28,16 @@ const ProductCard = ({ product }) => {
         url={product.url}
       />
       <ProductInfo product={product} />
-      <WishlistIcon
-        isInWishlist={isInWishlist}
-        toggleWishlist={handleToggleWishlist(
-          username,
-          product,
-          setIsInWishlist,
-        )}
-      />
+      {username && (
+        <WishlistIcon
+          isInWishlist={isInWishlist}
+          toggleWishlist={handleToggleWishlist(
+            username,
+            product,
+            setIsInWishlist,
+          )}
+        />
+      )}
     </div>
   )
 }
