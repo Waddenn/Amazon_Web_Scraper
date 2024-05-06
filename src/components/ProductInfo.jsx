@@ -11,7 +11,7 @@ const ProductInfo = ({ product }) => (
     <Link href={`/product/${product.asin}`} passHref>
       <Tippy content="Afficher l'historique des prix" theme="light-border">
         <div className={`${styles.price} ${styles.clickable}`}>
-          {product.price}
+          {product.price ? product.price : "Pas de prix connue"}
         </div>
       </Tippy>
     </Link>
