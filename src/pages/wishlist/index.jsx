@@ -3,6 +3,7 @@ import ProductCardWishlist from "@/components/ProductCardWishlist"
 import styles from "@/styles/Home.module.css"
 import { parseCookies } from "nookies"
 import axios from "axios"
+import { handleToggleWishlist } from "@/utils/wishlistFonctions"
 
 export const getServerSideProps = async (context) => {
   const cookies = parseCookies(context)
@@ -17,18 +18,25 @@ export const getServerSideProps = async (context) => {
     `http://localhost:3000/api/wishlist?${params.toString()}`,
   )
 
-  return { props: { initialList: list } }
+  return { props: { initialList: list, username } }
 }
-
-const Home = ({ initialList }) => {
-  const [list] = useState(initialList)
+const Home = ({ initialList, username }) => {
+  const [products, setProducts] = useState(initialList)
+  const handleDeleteWishlist = (productCard, setIsInWishlist) => async () => {
+    await handleToggleWishlist(username, productCard, setIsInWishlist)()
+    setProducts([...products].filter((product) => product !== productCard))
+  }
 
   return (
     <div className={styles.container1}>
       <h1 className={styles.title}>Wishlist</h1>
       <div className={styles.productGrid}>
-        {list.map((product, index) => (
-          <ProductCardWishlist key={index} product={product} />
+        {products.map((product, index) => (
+          <ProductCardWishlist
+            key={index}
+            product={product}
+            handleDelete={handleDeleteWishlist}
+          />
         ))}
       </div>
     </div>

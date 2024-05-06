@@ -4,36 +4,32 @@ import styles from "@/styles/ProductCard.module.css"
 import ProductImage from "./ProductImage"
 import ProductInfo from "./ProductInfo"
 import WishlistIcon from "./WishlistIcon"
-import { checkWishlist, handleToggleWishlist } from "@/utils/wishlistFonctions"
+import { checkWishlist } from "@/utils/wishlistFonctions"
 
-const ProductCardWishlist = ({ product }) => {
+const ProductCardWishlist = ({ product: productCard, handleDelete }) => {
   const [isInWishlist, setIsInWishlist] = useState(false)
-  const [username, setUsername] = useState(null)
+  const [_, setUsername] = useState(null)
 
   useEffect(() => {
     const user = Cookies.get("username")
 
     if (user) {
       setUsername(user)
-      checkWishlist(user, product._id).then(setIsInWishlist)
+      checkWishlist(user, productCard._id).then(setIsInWishlist)
     }
-  }, [product._id])
+  }, [productCard._id])
 
   return (
     <div className={styles.card}>
       <ProductImage
-        imageUrl={product.imageUrl}
-        title={product.title}
-        url={product.url}
+        imageUrl={productCard.imageUrl}
+        title={productCard.title}
+        url={productCard.url}
       />
-      <ProductInfo product={product} />
+      <ProductInfo product={productCard} />
       <WishlistIcon
         isInWishlist={isInWishlist}
-        toggleWishlist={handleToggleWishlist(
-          username,
-          product,
-          setIsInWishlist,
-        )}
+        toggleWishlist={handleDelete(productCard, setIsInWishlist)}
       />
     </div>
   )
