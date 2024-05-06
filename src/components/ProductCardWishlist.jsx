@@ -27,10 +27,7 @@ const ProductCardWishlist = ({ product: productCard, handleDelete }) => {
         url={productCard.url}
       />
       <ProductInfo product={productCard} />
-      <WishlistIcon
-        isInWishlist={isInWishlist}
-        toggleWishlist={handleDelete(productCard, setIsInWishlist)}
-      />
+      <WishlistIcon isInWishlist={isInWishlist} toggleWishlist={handleDelete} />
     </div>
   )
 }
