@@ -6,6 +6,7 @@ import Cookies from "js-cookie"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
+// eslint-disable-next-line max-lines-per-function
 const Navbar = () => {
   const router = useRouter()
   const [minPrice, setMinPrice] = useState("")
@@ -14,13 +15,12 @@ const Navbar = () => {
   const [period, setPeriod] = useState(router.query.tp || "1y")
   const isCategoryPage = router.pathname.includes("/[category]")
   const isProductPage = router.pathname.includes("/product")
-
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1)
-  }
+  const capitalizeFirstLetter = (string) =>
+    string.charAt(0).toUpperCase() + string.slice(1)
 
   useEffect(() => {
     const usernameFromCookie = Cookies.get("username")
+
     if (usernameFromCookie) {
       setUsername(capitalizeFirstLetter(usernameFromCookie))
     }
@@ -44,7 +44,6 @@ const Navbar = () => {
     setUsername("")
     router.push("/login")
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     router.push({

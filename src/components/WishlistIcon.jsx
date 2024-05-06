@@ -1,5 +1,5 @@
 import { FaRegBookmark, FaBookmark } from "react-icons/fa"
-import styles from "@/styles/ProductCard.module.css" // Assurez-vous que le chemin est correct
+import styles from "@/styles/ProductCard.module.css"
 
 const WishlistIcon = ({ isInWishlist, toggleWishlist }) => (
   <div className={styles.bookmarkIcon} onClick={toggleWishlist}>
