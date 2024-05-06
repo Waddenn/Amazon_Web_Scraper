@@ -10,8 +10,12 @@ const ProductInfo = ({ product }) => (
       <span className={styles.votes}>({product.votes} votes)</span>
     </div>
     <h3 className={styles.title}>{product.title}</h3>
-    <Link href={`/product/${product.asin}`} className="flex" passHref>
-      <Tippy content="Afficher l'historique des prix" theme="light-border">
+    <Link href={`/product/${product.asin}`} passHref>
+      <Tippy
+        content="Afficher l'historique des prix"
+        theme="light-border"
+        offset={[0, 20]}
+      >
         <div className={`${styles.price}`}>
           {product.price ? product.price : "Pas de prix connue"}
         </div>
