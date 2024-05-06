@@ -60,14 +60,14 @@ const Navbar = () => {
           <input
             className={styles.filterInput}
             type="number"
-            placeholder="Min Price"
+            placeholder="Prix Min"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
           />
           <input
             className={styles.filterInput}
             type="number"
-            placeholder="Max Price"
+            placeholder="Prix Max"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
           />
