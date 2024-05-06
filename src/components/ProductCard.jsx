@@ -1,12 +1,29 @@
-import { FaRegBookmark, FaBookmark } from "react-icons/fa"
-import React, { useState, useEffect } from "react"
-import Image from "next/image"
-import Link from "next/link"
+import { useState, useEffect } from "react"
 import Cookies from "js-cookie"
 import styles from "@/styles/ProductCard.module.css"
-import Tippy from "@tippyjs/react"
-import "tippy.js/dist/tippy.css"
-import "tippy.js/themes/light-border.css"
+import ProductImage from "./ProductImage"
+import ProductInfo from "./ProductInfo"
+import WishlistIcon from "./WishlistIcon"
+
+const checkWishlist = async (user, productID) => {
+  const response = await fetch(
+    `http://localhost:3000/api/wishlist?username=${user}`,
+  )
+  const wishlist = await response.json()
+  return wishlist.some((item) => item._id === productID)
+}
+
+const toggleWishlist = async (username, product) => {
+  const response = await fetch(
+    `http://localhost:3000/api/wishlist?username=${username}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product }),
+    },
+  )
+  return response.json()
+}
 
 const ProductCard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false)
@@ -14,92 +31,34 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     const user = Cookies.get("username")
-    setUsername(user)
     if (user) {
-      checkWishlist(user)
+      setUsername(user)
+      checkWishlist(user, product._id).then(setIsInWishlist)
     }
-  }, [])
+  }, [product._id])
 
-  const checkWishlist = async (user) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/wishlist?username=${user}`,
-      )
-      const wishlist = await response.json()
-      const productInWishlist = wishlist.some(
-        (item) => item._id === product._id,
-      )
-      setIsInWishlist(productInWishlist)
-    } catch (error) {
-      console.error("Erreur lors de la vérification de la wishlist:", error)
-    }
-  }
-
-  const addToWishlist = async () => {
-    if (!username) {
-      alert("Vous devez être connecté pour ajouter des articles à la wishlist.")
-      return
-    }
-
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/wishlist?username=${username}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ product }),
-        },
-      )
-      const data = await response.json()
-
-      if (response.ok) {
-        setIsInWishlist(true)
-      } else if (response.status === 409) {
-        setIsInWishlist(true)
-        alert("Produit déjà dans la wishlist")
-      } else {
-        alert(data.message || "Une erreur est survenue")
-      }
-    } catch (error) {
-      console.error("Erreur lors de l'ajout du produit à la wishlist:", error)
-      alert("Une erreur est survenue lors de l'ajout du produit à la wishlist.")
+  const handleToggleWishlist = async () => {
+    if (!username) return
+    setIsInWishlist((prevState) => !prevState)
+    const result = await toggleWishlist(username, product)
+    if (result.success) {
+      setIsInWishlist((prevState) => !prevState)
     }
   }
 
   return (
     <div className={styles.card}>
       <div className={styles.rank}>{product.rank}</div>
-      <Link href={product.url} passHref>
-        <div className={styles.imageWrapper}>
-          <Image
-            src={product.imageUrl}
-            alt={product.title}
-            width={600}
-            height={400}
-          />
-        </div>
-      </Link>
-      <div className={styles.ratingWrapper}>
-        <span className={styles.rating}>{product.rating}</span>
-        <span className={styles.votes}>({product.votes} votes)</span>
-      </div>
-      <h3 className={styles.title}>{product.title}</h3>
-      <Link href={`/product/${product.asin}`} passHref>
-        <Tippy content="Afficher l'historique des prix" theme="light-border">
-          <p className={`${styles.price} ${styles.clickable}`}>
-            {product.price}
-          </p>
-        </Tippy>
-      </Link>
-      <div className={styles.bookmarkIcon} onClick={addToWishlist}>
-        {isInWishlist ? (
-          <FaBookmark size={24} color="#e44d26" />
-        ) : (
-          <FaRegBookmark size={24} />
-        )}
-      </div>
+      <ProductImage
+        imageUrl={product.imageUrl}
+        title={product.title}
+        url={product.url}
+      />
+      <ProductInfo product={product} />
+      <WishlistIcon
+        isInWishlist={isInWishlist}
+        toggleWishlist={handleToggleWishlist}
+      />
     </div>
   )
 }

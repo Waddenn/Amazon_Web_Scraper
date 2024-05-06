@@ -83,4 +83,5 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+  z-index: 20;
 }
